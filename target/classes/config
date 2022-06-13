@@ -1,0 +1,5 @@
+#tanks count at initialization
+initTanksCount=5
+#fireStrategy
+GoodFS=com.development.tank.FourDirFire
+BadFS=com.development.tank.DefaultFire
