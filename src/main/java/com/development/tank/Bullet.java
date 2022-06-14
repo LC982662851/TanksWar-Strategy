@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class Bullet {
 
-    private TankFrame tf = null;
+    private GameModel gm = null;
     public static int WIDTH = ResourceMgr.bulletD.getWidth(), HEIGHT = ResourceMgr.bulletD.getHeight();
     private static final int SPEED = 10;
 
@@ -29,8 +29,8 @@ public class Bullet {
         this.group = group;
     }
 
-    public Bullet(TankFrame tf, Group group, int x, int y, Dir dir) {
-        this.tf = tf;
+    public Bullet(GameModel gm, Group group, int x, int y, Dir dir) {
+        this.gm = gm;
         this.group = group;
         this.x = x;
         this.y = y;
@@ -41,13 +41,13 @@ public class Bullet {
         rect.width = WIDTH;
         rect.height = HEIGHT;
 
-        tf.bullets.add(this);
+        gm.bullets.add(this);
     }
 
 
     public void paint(Graphics g) {
         if (!living) {
-            tf.bullets.remove(this);
+            gm.bullets.remove(this);
         }
 
         switch (dir) {
@@ -123,7 +123,7 @@ public class Bullet {
             int ey = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
 
             //new 一个爆炸
-            tf.explodes.add(new Explode(ex, ey, tf));
+            gm.explodes.add(new Explode(ex, ey, gm));
         }
     }
 

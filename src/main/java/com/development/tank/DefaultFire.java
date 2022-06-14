@@ -7,6 +7,6 @@ public class DefaultFire implements FireComparator {
         int by = tank.getY() + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
         //TODO:原fire方法是通过下面将子弹new到数组的 用策略模式的话不太好用 改成在bullet构造方法中给它放到数组中
         //tf.bullets.add(new Bullet(tf, group, bx, by, this.dir));
-        new Bullet(tank.tf, tank.group, bx, by, tank.getDir());
+        new Bullet(tank.gm, tank.group, bx, by, tank.getDir());
     }
 }

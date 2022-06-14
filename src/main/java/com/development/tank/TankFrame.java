@@ -10,11 +10,7 @@ import java.util.List;
 
 public class TankFrame extends Frame {
 
-    Tank myTank = new Tank(200, 400, Dir.DOWN, Group.GOOD, this);
-
-    List<Bullet> bullets = new ArrayList<Bullet>();
-    List<Tank> tanks = new ArrayList<Tank>();
-    List<Explode> explodes = new ArrayList<Explode>();
+    public GameModel gm = new GameModel();
 
 
     static final int GAME_WIDTH = 1080, GAME_HEIGHT = 720;
@@ -62,39 +58,7 @@ public class TankFrame extends Frame {
     //而不应该是我把它们一个一个拿过来帮他们画
     @Override
     public void paint(Graphics g) {
-        Color c = g.getColor();
-        g.setColor(Color.white);
-        g.drawString("子弹的数量" + bullets.size(), 10, 60);
-        g.drawString("敌方坦克的数量" + tanks.size(), 10, 80);
-        g.drawString("爆炸的数量：" + explodes.size(), 10, 100);
-        g.setColor(c);
-
-        myTank.paint(g);
-        /**
-         *增强型for循环-》里面用的是迭代器遍历
-         * 该迭代器不允许用除它之外的方式进行CRUD(两个值不一致)，会抛异常
-         * (我们这里用的是list的remove方法移除)
-         * 将其改为普通遍历即可（或调用iterator的remove）
-         */
-        for (int i = 0; i < bullets.size(); i++) {
-            bullets.get(i).paint(g);
-        }
-
-        for (int i = 0; i < tanks.size(); i++) {
-            tanks.get(i).paint(g);
-        }
-
-        for (int i = 0; i < bullets.size(); i++) {
-            for (int j = 0; j < tanks.size(); j++) {
-                bullets.get(i).collideWith(tanks.get(j));
-            }
-        }
-
-        for (int i = 0; i < explodes.size(); i++) {
-            explodes.get(i).paint(g);
-        }
-
-
+        gm.paint(g);
     }
 
 
@@ -145,13 +109,15 @@ public class TankFrame extends Frame {
                     bD = false;
                     break;
                 case KeyEvent.VK_CONTROL:
-                    myTank.fire();
+                    gm.getMainTank().fire();
                     break;
             }
             setMainTankDir();
         }
 
         private void setMainTankDir() {
+
+            Tank myTank = gm.getMainTank();
 
             if (!bL && !bD && !bR && !bU) {
                 myTank.setMoving(false);

@@ -23,7 +23,9 @@ public class Tank {
     public Group group = Group.BAD;
 
     //加上一个TankFrame的引用(把从tank这new出来的子弹对象放置到tankFrame里的子弹对象)
-    public TankFrame tf;
+
+
+    public GameModel gm;
 
     //可以考虑将其作为参数 或者成员变量
     private FireComparator fc;
@@ -68,12 +70,12 @@ public class Tank {
         this.group = group;
     }
 
-    public Tank(int x, int y, Dir dir, Group group, TankFrame tf) {
+    public Tank(int x, int y, Dir dir, Group group, GameModel gm) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.tf = tf;
+        this.gm = gm;
 
         rect.x = this.x;
         rect.y = this.y;
@@ -149,7 +151,7 @@ public class Tank {
     public void paint(Graphics g) {
 
         //移除死去的坦克
-        if (!living) tf.tanks.remove(this);
+        if (!living) gm.tanks.remove(this);
 
         switch (dir) {
             case LEFT:

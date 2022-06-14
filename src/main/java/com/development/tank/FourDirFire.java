@@ -8,7 +8,7 @@ public class FourDirFire implements FireComparator{
 
         Dir[] dirs = Dir.values();
         for (Dir dir : dirs) {
-            new Bullet(tank.tf,tank.getGroup(),bx,by,dir);
+            new Bullet(tank.gm,tank.getGroup(),bx,by,dir);
         }
     }
 }
